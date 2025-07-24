@@ -39,6 +39,10 @@ const formulaireExtraitAvecNumero = () => ({
     contact1: '',
     contact2: '',
     email: '',
+    lieuHabitationChoisie: '',
+    quartierChoisie: '',
+    villeChoisie: '',
+    mairieChoisie: '',
 
     // champs d'affichage d'erreur
     errorMessage: '',
@@ -74,15 +78,41 @@ const formulaireExtraitAvecNumero = () => ({
             mairie : this.mairie
           }
           // Envoi des données à l'api en utilisant axios
+          // DEBUT TRY CATCH
           try {
-            const response = await axios.post('/api/extrait-avec-numero', data);
-            if(response.status === 201){
-                // localStorage.setItem('extraitData', JSON.stringify(data));
-                alert('Données reçues', response.status)
-            }
-          } catch (error) {
-            console.log("Erreur lors de l'envoi", error)
-          }
+  const response = await axios.post('/api/extrait-avec-numero', data, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    }
+  });
+
+  if (response.status === 201) {
+    // localStorage.setItem('extraitData', JSON.stringify(data));
+    alert('Données reçues : ' + response.status);
+  } else {
+    console.log('Statut inattendu :', response.status);
+  }
+
+} catch (error) {
+  if (error.response) {
+    console.log("Erreur de validation ou de requête :", error.response.data);
+
+    // Optionnel : extraire les erreurs de validation Laravel
+    if (error.response.data.errors) {
+      for (const [field, messages] of Object.entries(error.response.data.errors)) {
+        console.log(`Champ "${field}" : ${messages.join(', ')}`);
+      }
+    }
+  } else if (error.request) {
+    console.log("Pas de réponse reçue du serveur :", error.request);
+  } else {
+    console.log("Erreur lors de la configuration de la requête :", error.message);
+  }
+}
+
+// FIN TRY CATCH
+
         }
     }
 

@@ -22,5 +22,8 @@ Route::get('/status',[TestController::class, 'index'])
 //     ]);
 // });
 
-Route::post('/extrait-avec-numero', [ExtraitAvecNumeroController::class, 'store'])
-;
+// Enregistrer un extrait avec numero
+Route::post('/extrait-avec-numero', [ExtraitAvecNumeroController::class, 'store']);
+
+// Retrouver un extrait utilisant le numero de demande
+Route::get('/extrait/{numero_demande}', [ExtraitAvecNumeroController::class, 'show']);

@@ -1,7 +1,7 @@
 import './bootstrap';
 import 'bootstrap';
 import formulaireExtraitAvecNumero from './components/extraitAvecNumeroJs'
-
+import extraitSearch from './components/rechercheDocumentJs';
 
 
 // Import Alpine.js pour gerer les interactions front-end et l'injection dynamique des formulaires de chaque document
@@ -11,6 +11,9 @@ window.Alpine = Alpine;
 // on charge les scripts du fichier components/extraitAvecNumeroJs.js
 window.formulaireExtraitAvecNumero = formulaireExtraitAvecNumero
 
+
+// On charge le script de Rechercher un document depuis le fichier components/rechercheDocumentJs.js
+Alpine.data('extraitSearch', extraitSearch);
 
 
 window.formComponent = () => ({

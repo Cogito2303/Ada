@@ -122,10 +122,11 @@
         <div class="col-md-6">
             <label class="form-label fw-bold">Quartier</label>
             <select class="form-select" x-model="quartier" :disabled="!lieu">
-            <option>Selectionne le quartier </option>
+                <option>Selectionne le quartier </option>
             <template x-if="lieu">
                 <template x-for="q in villeQuartier[lieu]" :key="q">
                 <option x-text="q"></option>
+
                 </template>
             </template>
             <template x-if="!lieu">
