@@ -1,19 +1,23 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\PaiementController;
-use Illuminate\Http\Request;
-
 
 Route::get('/', function () {
-    return view('demande-document');
-})->name('demande');
+    return view('ask-document');
+})->name('ask');
 
-Route::get('/recherche-document', function () {
-    return view('recherche-document');
-})->name('recherche');
+Route::get('/search', function () {
+    return view('search-document');
+})->name('search');
 
-Route::get('/suivre-document', function () {
-    return view('suivre-document');
-})->name('suivi');
+Route::get('/tracking', function () {
+    return view('tracking-document');
+})->name('tracking');
 
+// // Route d'appel vers l'api wave
+// Route::get('/wave/redirect/{transaction}', [PaymentController::class, 'redirectToWave'])->name('wave.payment.loader');
+
+// // webhook pour wave
+// Route::post('/wave/webhook', [PaymentController::class, 'handleWebhook'])->name('wave.webhook');
+// Route::get('/payment/success', fn() => view('payment.success'))->name('payment.success');
+// Route::get('/payment/failed', fn() => view('payment.failed'))->name('payment.failed');

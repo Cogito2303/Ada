@@ -34,5 +34,9 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
+    
+    'wave' => [
+    'api_key' => env('WAVE_API_KEY'),
+    ],
 
 ];

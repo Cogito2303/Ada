@@ -1,5 +1,5 @@
 @extends('layouts.app')
 @section('title', 'Suivi de Document')
 @section('content')
-<x-suivre-document />
+<x-tracking-document />
 @endsection

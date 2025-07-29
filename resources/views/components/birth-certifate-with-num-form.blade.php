@@ -7,7 +7,7 @@
     {{-- ici les données viennent du fichier app.js --}}
     {{-- x-init pour initialiser et charger les données de x-data --}}
     {{-- x_model pour recuperer les données des champs dans app.js, les verifier avant la soumission --}}
-  <form @submit.prevent =submitFormulaireExtraitAvecNumero()  x-data="formulaireExtraitAvecNumero()" x-init="$watch('lieu', () => quartier=''); $watch('ville', () => mairie='')" class="border rounded p-3 shadow-sm">
+  <form @submit.prevent =submitBirthCertificateWithNumForm()  x-data="birthCertificateWithNumForm()" x-init="$watch('residence', () => neighborhood=''); $watch('cityForAsk', () => municipalOffice='')" class="border rounded p-3 shadow-sm">
 
     {{-- INFORMATIONS SUR L'EXTRAIT DE NAISSANCE --}}
       <fieldset class="border p-2 mb-2">
@@ -16,33 +16,33 @@
             <!-- Nom & Prénom de l'enfant -->
             <div class="col-md-4">
                 <label class="form-label fw-bold"> Nom </label> <span style="color: red">*</span>
-                <input type="text" class="form-control" placeholder="Entrez votre nom" x-model="nomEnfant">
+                <input id="childLastNameId" type="text" class="form-control" placeholder="Entrez votre nom" x-model="childLastName">
                 {{-- Pour afficher un message d'erreur --}}
             </div>
             <div class="col-md-4">
                 <label class="form-label fw-bold">Prénom(s)</label>
-                <input type="text" class="form-control" placeholder="Entrez votre prénom" x-model="prenomEnfant">
+                <input id="childFirstNameId" type="text" class="form-control" placeholder="Entrez votre prénom" x-model="childFirstName">
             </div>
              <div class="col-md-4">
                 <label class="form-label fw-bold">Date de naissance</label>
-                <input type="date" class="form-control" x-model="dateNaissance">
+                <input id="childBirthdayId" type="date" class="form-control" x-model="childBirthday">
             </div>
             <!-- Nom & Prénom des parents -->
             <div class="col-md-6 mt-3">
                 <label class="form-label fw-bold">Nom du père sur l'extrait</label>
-                <input type="text" class="form-control" placeholder="Entrez le nom du père" x-model="nomPere">
+                <input id="fatherLastNameId" type="text" class="form-control" placeholder="Entrez le nom du père" x-model="fatherLastName">
             </div>
             <div class="col-md-6 mt-3">
                 <label class="form-label fw-bold">Prénom du père sur l'extrait</label>
-                <input type="text" class="form-control" placeholder="Entrez le prénom du père" x-model="prenomPere">
+                <input id="fatherFirstNameId" type="text" class="form-control" placeholder="Entrez le prénom du père" x-model="fatherFirstName">
             </div>
             <div class="col-md-6 mt-3">
                 <label class="form-label fw-bold">Nom de la mère sur l'extrait</label>
-                <input type="text" class="form-control" placeholder="Entrez le nom de la mère" x-model="nomMere">
+                <input id="motherLastNameId" type="text" class="form-control" placeholder="Entrez le nom de la mère" x-model="motherLastName">
             </div>
             <div class="col-md-6 mt-3">
                 <label class="form-label fw-bold">Prénom de la mère sur l'extrait</label>
-                <input type="text" class="form-control" placeholder="Entrez le prénom de la mère" x-model="prenomMere">
+                <input id="motherFirstNameId" type="text" class="form-control" placeholder="Entrez le prénom de la mère" x-model="motherFirstName">
             </div>
 
              <!-- Numéro d'extrait -->
@@ -50,7 +50,7 @@
       <legend class="float-none w-auto px-1 fw-bold">Numéro d'extrait</legend>
       <div class="row">
         <div class="col-md-3">
-          <input type="number" class="form-control mb-1" placeholder="N° d'acte" x-model="numeroActe">
+          <input id="certificateFirstNumId" type="number" class="form-control mb-1" placeholder="N° d'acte" x-model="certificateFirstNum">
         </div>
 
          <div class="col-md-1">
@@ -60,25 +60,25 @@
         </div>
 
          <div class="col-md-2 mb-1">
-          <select class="form-select" x-model="jourActe">
+          <select id="certificateDayId" class="form-select" x-model="certificateDay">
             {{-- injection des jours depuis le fichier app.js gerer par Alpine.js --}}
             <option>Jour...</option>
-            <template x-for="jour in jourList" :key="jour">
-              <option x-text="jour" :value="jour"></option>
+            <template x-for="day in dayList" :key="day">
+              <option x-text="day" :value="day"></option>
             </template>
           </select>
         </div>
         {{-- injection des mois depuis le fichier app.js gerer par Alpine.js --}}
         <div class="col-md-3 mb-1">
-          <select class="form-select" x-model="moisActe">
+          <select id="certificateMonthId" class="form-select" x-model="certificateMonth">
             <option>Mois...</option>
-            <template x-for="mois in moisList" :key="mois">
-              <option x-text="mois"></option>
+            <template x-for="month in monthList" :key="month">
+              <option x-text="month"></option>
             </template>
           </select>
         </div>
         <div class="col-md-2 mb-1">
-          <input type="number" class="form-control" min="1" placeholder="Année" x-model="anneeActe">
+          <input id="certificateYearId" type="number" class="form-control" min="1" placeholder="Année" x-model="certificateYear">
         </div>
       </div>
     </fieldset>
@@ -92,27 +92,27 @@
             <div class="row mb-3">
             <div class="col-md-4">
                 <label class="form-label fw-bold">Contact 1</label>
-                <input type="text" class="form-control" placeholder="Ex: 0707070707" x-model="contact1">
+                <input id="phoneNum1Id" type="text" class="form-control" placeholder="Ex: 0707070707" x-model="phoneNum1">
             </div>
 
              <div class="col-md-4">
                 <label class="form-label fw-bold">Contact 2</label>
-                <input type="text" class="form-control" placeholder="Ex: 0707070707" x-model="contact2">
+                <input id="phoneNum2Id" type="text" class="form-control" placeholder="Ex: 0707070707" x-model="phoneNum2">
             </div>
 
             <div class="col-md-4">
                 <label class="form-label fw-bold">Email</label>
-                <input type="email" class="form-control" placeholder="exemple@domaine.com" x-model="email">
+                <input id="emailId" type="email" class="form-control" placeholder="exemple@domaine.com" x-model="email">
             </div>
             </div>
-            <!-- Lieu d'habitation & Quartier -->
-        {{-- injection des lieux villes depuis le fichier app.js gerer par Alpine.js --}}
+            <!-- place d'habitation & Quartier -->
+        {{-- injection des placex villes depuis le fichier app.js gerer par Alpine.js --}}
         <div class="row mb-3">
         <div class="col-md-6">
-            <label class="form-label fw-bold">Lieu d'habitation</label>
-            <select class="form-select" x-model="lieu">
-            <option  value="">Choisir un lieu</option>
-            <template x-for="(q, key) in villeQuartier" :key="key">
+            <label class="form-label fw-bold">Lieu de residence</label>
+            <select id="residenceId" class="form-select" x-model="residence">
+            <option selected disabled value="">Choisissez votre lieu de residence</option>
+            <template x-for="(q, key) in residenceNeighborhood" :key="key">
                 <option :value="key" x-text="key"></option>
             </template>
             </select>
@@ -121,16 +121,15 @@
 
         <div class="col-md-6">
             <label class="form-label fw-bold">Quartier</label>
-            <select class="form-select" x-model="quartier" :disabled="!lieu">
+            <select id="neighborhoodId" class="form-select" x-model="neighborhood" :disabled="!residence">
                 <option>Selectionne le quartier </option>
-            <template x-if="lieu">
-                <template x-for="q in villeQuartier[lieu]" :key="q">
+            <template x-if="residence">
+                <template x-for="q in residenceNeighborhood[residence]" :key="q">
                 <option x-text="q"></option>
-
                 </template>
             </template>
-            <template x-if="!lieu">
-                <option selected disabled>Choisir le lieu d'abord</option>
+            <template x-if="!residence">
+                <option selected disabled>Choisissez le lieu de residence d'abord</option>
             </template>
             </select>
         </div>
@@ -141,9 +140,9 @@
       <div class="col-md-6">
         <label class="form-label fw-bold">Ville cible</label>
         {{-- injection des villes depuis le fichier app.js gerer par Alpine.js --}}
-        <select class="form-select" x-model="ville">
+        <select id="cityForAskId" class="form-select" x-model="cityForAsk">
           <option selected disabled value="">Choisir une ville</option>
-          <template x-for="(m, key) in villeMairie" :key="key">
+          <template x-for="(m, key) in cityMunicipalOffice" :key="key">
             <option :value="key" x-text="key"></option>
           </template>
         </select>
@@ -151,19 +150,25 @@
       {{-- Injection de la mairie qui depend de la ville --}}
       <div class="col-md-6">
         <label class="form-label fw-bold">Mairie cible</label>
-        <select class="form-select" x-model="mairie" :disabled="!ville">
+        <select id="municipalOfficeId" class="form-select" x-model="municipalOffice" :disabled="!cityForAsk">
             <option>Selectionne la mairie </option>
-          <template x-if="ville">
-            <template x-for="m in villeMairie[ville]" :key="m">
+          <template x-if="cityForAsk">
+            <template x-for="m in cityMunicipalOffice[cityForAsk]" :key="m">
               <option x-text="m"></option>
             </template>
           </template>
-          <template x-if="!ville">
+          <template x-if="!cityForAsk">
             <option selected disabled>Choisir la ville d'abord</option>
           </template>
         </select>
       </div>
     </div>
+
+            <div class="col-md-4">
+                <label class="form-label fw-bold"> Nombre de Copie(s) </label> <span style="color: red">*</span>
+                <input id="numberOfCopiesId" type="number" class="form-control" placeholder="Nombre de copies" x-model="numberOfCopies">
+                {{-- Pour afficher un message d'erreur --}}
+            </div>
     {{-- Affichage du message d'erreur en cas d'invalidité d'un champ --}}
     <div class="text-danger mt-2" x-show="errorMessage" x-text="errorMessage"></div>
 
