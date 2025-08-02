@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BirthCertificate\BirthCertificateWithNumController;
+use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\Settings\SettingsController;
 
 Route::get('/', function () {
     return view('ask-document');
@@ -17,7 +21,18 @@ Route::get('/tracking', function () {
 // // Route d'appel vers l'api wave
 // Route::get('/wave/redirect/{transaction}', [PaymentController::class, 'redirectToWave'])->name('wave.payment.loader');
 
-// // webhook pour wave
-// Route::post('/wave/webhook', [PaymentController::class, 'handleWebhook'])->name('wave.webhook');
-// Route::get('/payment/success', fn() => view('payment.success'))->name('payment.success');
-// Route::get('/payment/failed', fn() => view('payment.failed'))->name('payment.failed');
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::get('/birth-certificates', [BirthCertificateWithNumController::class, 'index']);
+});
+
+
+Route::middleware('super.admin')->group(function () {
+    Route::resource('users', UserController::class);
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
+});
+
+Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+Route::post('/users', [UserController::class, 'store'])->name('users.store');

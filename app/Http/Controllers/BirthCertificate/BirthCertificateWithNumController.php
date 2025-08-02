@@ -48,4 +48,18 @@ public function show($asking_number): JsonResponse
         return response()->json($extrait);
     }
 
+
+    // Afficher le role 
+    public function index(Request $request)
+{
+    $user = $request->user();
+
+    if ($user->isSuperAdmin()) {
+        return response()->json(BirthCertificateWithNum::all());
+    }
+
+    return response()->json(
+        BirthCertificateWithNum::where('residence', $user->residence)->get()
+    );
+}
 }

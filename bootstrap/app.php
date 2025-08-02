@@ -12,7 +12,13 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        // Pour les middlewares globaux
+    // $middleware->append(ExampleGlobalMiddleware::class);
+    // Middleware pour les routes
+        $middleware->alias([
+            'super.admin' => \App\Http\Middleware\EnsureSuperAdmin::class,
+        ]);
+
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
