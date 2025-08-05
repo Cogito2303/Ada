@@ -17,6 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
     // Middleware pour les routes
         $middleware->alias([
             'super.admin' => \App\Http\Middleware\EnsureSuperAdmin::class,
+            'superOrAdmin' => \App\Http\Middleware\EnsureSuperOrAdmin::class,
         ]);
 
     })

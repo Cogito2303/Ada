@@ -3,6 +3,14 @@
         <x-slot name="logo">
             <x-authentication-card-logo />
         </x-slot>
+        
+         <!-- ✅ Message personnalisé pour les comptes inactifs -->
+        @if (session('inactive_error'))
+            <div class="text-red-600 mb-4 font-semibold">
+                {{ session('inactive_error') }}
+            </div>
+        @endif
+
 
         <x-validation-errors class="mb-4" />
 
@@ -11,6 +19,7 @@
                 {{ $value }}
             </div>
         @endsession
+        
 
         <form method="POST" action="{{ route('login') }}">
             @csrf

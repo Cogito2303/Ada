@@ -101,4 +101,39 @@ class UserController extends Controller
         ->with('success', "L'utilisateur a été supprimé.");
 }
 
+// profile de user 
+    public function profile(Request $request){
+        $user = $request->user();
+        if($user->isSuperAdmin()){
+            return view ('profile.super.index');
+        }
+        elseif ($user->isAdmin()) {
+            return view ('profile.admin.index');
+            
+        }
+    }
+
+    // Mettre à jour le profil
+    public function update_profile(Request $request){
+        $user = $request->user();
+        if($user->isSuperAdmin()){
+            return view ('profile.super.update');
+        }
+        elseif ($user->isAdmin()) {
+            return view ('profile.admin.update');
+            
+        }
+    }
+
+    // Changer le status d'un user
+    public function toggleStatus($id)
+{
+    $admin = User::findOrFail($id);
+    $admin->is_active = !$admin->is_active;
+    $admin->save();
+
+    return back()->with('status', 'Statut mis à jour.');
+}
+
+
 }

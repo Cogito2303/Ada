@@ -19,12 +19,11 @@
 
       <!-- Desktop links -->
       <div class="hidden md:flex items-center space-x-6">
-        <a href="{{ route('dashboard') }}" class="text-sm {{ navClass('dashboard') }}">🏠 Tableau de bord</a>
-
+        <a href="{{ route('dashboard') }}" class="text-sm {{ navClass('dashboard') }}">🏠Tableau de bord</a>
+        <a href="{{ route('birth-certificate.index') }}" class="text-sm {{ navClass('birth-certificate.index') }}">🧾Demandes</a>
         @if (Auth::user()->isSuperAdmin())
-          <a href="{{ route('users.index') }}" class="text-sm">🧾 Demandes</a>
-          <a href="{{ route('users.index') }}" class="text-sm {{ navClass('users.index') }}">👥 Utilisateurs</a>
-          <a href="{{ route('settings.index') }}" class="text-sm {{ navClass('settings.index') }}">⚙️ Paramètres</a>
+          <a href="{{ route('users.index') }}" class="text-sm {{ navClass('users.index') }}">👥Utilisateurs</a>
+          <a href="{{ route('settings.index') }}" class="text-sm {{ navClass('settings.index') }}">⚙️Paramètres</a>
         @endif
       </div>
 
@@ -52,7 +51,7 @@
                x-cloak
                @click.away="userMenu = false"
                class="absolute right-0 mt-2 w-40 bg-white dark:bg-gray-800 shadow-lg rounded-md py-2 z-20">
-            <a href="{{ route('profile.show') }}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">👤 Profil</a>
+            <a href="{{ route('profile') }}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">👤 Profil</a>
             <form method="POST" action="{{ route('logout') }}">
               @csrf
               <button type="submit" class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-100 dark:hover:bg-red-700 dark:text-red-400">

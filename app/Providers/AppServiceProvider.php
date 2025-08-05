@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
-
+\Carbon\Carbon::setLocale('fr'); //pour tranformer les elements du projet en français
 
 class AppServiceProvider extends ServiceProvider
 {

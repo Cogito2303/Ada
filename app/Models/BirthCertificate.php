@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class BirthCertificateWithNum extends Model
+class BirthCertificate extends Model
 {
-    protected $table = 'birth_certificate_with_nums';
+    protected $table = 'birth_certificate';
     protected $primaryKey = 'asking_number';
     public $incrementing = false;
     protected $fillable = [

@@ -3,9 +3,18 @@
 @section('content')
 
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+  @livewire('test-livewire')
+      <!-- Utilisateurs -->
+        <div class="bg-white dark:bg-gray-800 p-4 rounded shadow text-center">
+          <a href="{{ route('users.index') }}" class="text-sm">👥Utilisateurs</a>
+          <p class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">{{ $userCount }}</p>
+        </div>
+       <!-- Demandes -->
+       <div class="bg-white dark:bg-gray-800 p-4 rounded shadow text-center">
+          <a href="{{ route('birth-certificate.index') }}" class="text-sm">🧾Demandes</a>
+          <p class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">{{ $countBirthCertificate }}</p>
+      </div>
       @foreach([
-        ['title' => 'Utilisateurs', 'count' => $userCount ], //nombre d'utilisateur depuis la base de données
-        ['title' => 'Demandes', 'count' => 28],
         ['title' => 'Notifications', 'count' => 5],
         ['title' => 'Archives', 'count' => 320]
       ] as $item)
@@ -15,4 +24,5 @@
       </div>
       @endforeach
     </div>
+    
 @endsection

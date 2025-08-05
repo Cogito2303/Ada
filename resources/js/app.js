@@ -3,6 +3,7 @@ import 'bootstrap';
 import birthCertificateWithNumForm from './components/birthCertificateWithNumJs'
 import birthCertificateSearch from './components/searchDocumentJs';
 import registerForm from './components/registerFormJs';
+import { initNotificationListener } from './components/notification/notification';
 
 
 // Import Alpine.js pour gerer les interactions front-end et l'injection dynamique des formulaires de chaque document
@@ -14,7 +15,8 @@ import registerForm from './components/registerFormJs';
 window.birthCertificateWithNumForm = birthCertificateWithNumForm
 // On charge le script de Rechercher un document depuis le fichier components/rechercheDocumentJs.js
 Alpine.data('birthCertificateSearch', birthCertificateSearch);
-Alpine.data('registerForm', registerForm);                                          
+Alpine.data('registerForm', registerForm);
+initNotificationListener;                                     
 
 // On lance Alpine Js
 // Alpine.start()

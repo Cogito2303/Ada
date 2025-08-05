@@ -1,0 +1,10 @@
+OPTION 1 — Notifications dynamiques temps réel avec Laravel Echo + Pusher/Ably
+⚙️ Outils nécessaires :
+- Pusher ou Ably pour le broadcasting
+- Laravel Echo pour écouter les événements côté frontend
+- Livewire ou Alpine.js pour mettre à jour l’interface sans recharger
+🧩 Architecture rapide :
+- Événement Laravel : déclenché lors de la création d’un nouvel extrait
+- Broadcast via Pusher
+- Echo listener dans le dashboard SuperAdmin
+- Alpine/Livewire : mise à jour du badge, dropdown, ou message
