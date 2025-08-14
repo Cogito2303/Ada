@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class BirthCertificate extends Model
 {
-    protected $table = 'birth_certificate';
+    protected $table = 'birth_certificates';
     protected $primaryKey = 'asking_number';
     public $incrementing = false;
     protected $fillable = [
@@ -23,7 +23,9 @@ class BirthCertificate extends Model
     'neighborhood',
     'city',
     'municipal_office',
-    'number_of_copies'
+    'number_of_copies',
+    'status',
+    'picture', 
 ];
 
 }

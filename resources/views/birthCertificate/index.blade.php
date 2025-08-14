@@ -24,6 +24,7 @@
       <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Mairie</th>
       <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700"></th>
       <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Details/Impr</th>
+      <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Status</th>
       </tr>
     </thead>
     <tbody>
@@ -40,12 +41,33 @@
       </td>
       <!-- Action -->
       <td class="px-4 py-2 text-sm text-gray-600">
-      <a href="{{ route('birth-certificate.details', $certificate->asking_number) }}" target="_blank"
-      class="text-sm text-indigo-600 hover:underline hover:text-indigo-800 mr-4">
-      🖨️ Impr
-      </a>
-      <!-- form -->
+    @if ($certificate->picture)
+        <div class="flex items-center space-x-4">
+            {{-- Lien pour voir l’image --}}
+            <a href="{{ asset('storage/' . $certificate->picture) }}" target="_blank"
+               class="inline-flex items-center text-sm text-blue-600 hover:underline hover:text-blue-800">
+                Voir
+            </a>
+
+            {{-- Lien pour télécharger l’image --}}
+            <a href="{{ asset('storage/' . $certificate->picture) }}" download="extrait-{{ $certificate->asking_number }}.jpg"
+               class="inline-flex items-center text-sm text-green-600 hover:underline hover:text-green-800">
+                Télécharger
+            </a>
+        </div>
+    @else
+        {{-- Lien vers les détails du certificat --}}
+        <a href="{{ route('birth-certificate.details', $certificate->asking_number) }}" target="_blank"
+           class="inline-flex items-center text-sm text-indigo-600 hover:underline hover:text-indigo-800">
+            🖨️ Imprimer
+        </a>
+    @endif
+</td>
+      <!-- Status -->
+      <td>
+      @livewire('birth-certificate-status', ['certificate' => $certificate], key($certificate->id))
       </td>
+
 
       </tr>
     @endforeach

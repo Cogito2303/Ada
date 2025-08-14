@@ -13,6 +13,12 @@
   </div>
 
   <div class="mb-4">
+    <label class="block mb-1 text-sm text-gray-700" for="username">Nom d'utilisateur</label>
+    <input type="text" id="username" name="username" value="{{ old('username', $user->username) }}"
+           class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-indigo-200">
+  </div>
+
+  <div class="mb-4">
     <label class="block mb-1 text-sm text-gray-700" for="email">Email</label>
     <input type="email" id="email" name="email" value="{{ old('email', $user->email) }}"
            class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-indigo-200">
@@ -24,7 +30,6 @@
             class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-indigo-200">
       <option value="admin" {{ $user->role === 'admin' ? 'selected' : '' }}>Admin</option>
       <option value="super_admin" {{ $user->role === 'super_admin' ? 'selected' : '' }}>Super Admin</option>
-      <option value="user" {{ $user->role === 'user' ? 'selected' : '' }}>Utilisateur</option>
     </select>
   </div>
 

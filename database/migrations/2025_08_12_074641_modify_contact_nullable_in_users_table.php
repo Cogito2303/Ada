@@ -11,7 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::rename('birth_certificate_with_nums', 'birth_certificate');
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('municipal_office')->nullable()->change();
+
+        });
     }
 
     /**
@@ -19,7 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::rename('birth_certificate', 'birth_certificate_with_nums');
-
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
 };

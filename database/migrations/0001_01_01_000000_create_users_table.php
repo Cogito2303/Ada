@@ -14,12 +14,19 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('contact');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
+            $table->enum('role', ['admin', 'super_admin'])->default('admin');
+            $table->boolean('status')->default(true);
+            $table->string('residence')->nullable();
+            $table->string('neighborhood')->nullable();
+            $table->string('municipal_office', 100);
+
             $table->timestamps();
         });
 

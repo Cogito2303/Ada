@@ -25,8 +25,30 @@
                     <input type="text" name="name" class="w-full border rounded p-2" required>
                 </div>
                 <div class="w-full md:w-1/2">
+                    <label class="block font-medium" for="surnname">Prénom(s)</label>
+                    <input type="text" name="surname" class="w-full border rounded p-2" required>
+                </div>
+            </div>
+            <!-- Nom d'utilisateur et email -->
+            <div class="mb-4 flex flex-col md:flex-row gap-4">
+                <div class="w-full md:w-1/2">
+                    <label class="block font-medium" for="username">Nom d'utilisateur</label>
+                    <input type="text" name="username" class="w-full border rounded p-2" required>
+                </div>
+                <div class="w-full md:w-1/2">
                     <label class="block font-medium" for="email">Email</label>
                     <input type="email" name="email" class="w-full border rounded p-2" required>
+                </div>
+            </div>
+            {{-- Téléphone 1 + Téléphone 2 --}}
+            <div class="mb-4 flex flex-col md:flex-row gap-4">
+                <div class="w-full md:w-1/2">
+                    <label class="block font-medium" for="contact">Contact 1</label>
+                    <input type="text" name="contact" class="w-full border rounded p-2" required>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <label class="block font-medium" for="contact_2">Contact 2</label>
+                    <input type="text" name="contact_2" class="w-full border rounded p-2">
                 </div>
             </div>
 
@@ -52,6 +74,28 @@
                 </div>
             </div>
 
+            {{-- Ville + Mairie --}}
+             <div class="mb-4 flex flex-col md:flex-row gap-4">
+                <div class="w-full md:w-1/2">
+                    <label class="block font-medium" for="residence">Ville de Travail</label>
+                    <select name="municipal_office_city" x-model="city" class="w-full border rounded p-2" required>
+                        <option value="" disabled selected>Choisir une ville</option>
+                        <template x-for="city in cities" :key="city">
+                            <option :value="city" x-text="city"></option>
+                        </template>
+                    </select>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <label class="block font-medium" for="municipalOffice">Mairie de Travail</label>
+                    <select name="municipal_office" x-model="municipalOffice" class="w-full border rounded p-2" required>
+                        <option value="" disabled selected>Choisir une Mairie</option>
+                        <template x-for="q in municipalOffices" :key="q">
+                            <option :value="q" x-text="q"></option>
+                        </template>
+                    </select>
+                </div>
+            </div>
+   
             {{-- Mot de passe + Confirmation --}}
             <div class="mb-6 flex flex-col md:flex-row gap-4">
                 <div class="w-full md:w-1/2">

@@ -1,4 +1,5 @@
 import residenceNeighborhoodMap  from '../maps/residenceNeighborhoodMap'
+import cityMunicipalOfficeMap from '../maps/cityMunicipalOfficeMap'
 
 function registerForm() {
     return {
@@ -12,8 +13,19 @@ function registerForm() {
             this.neighborhood =''
         },
 
+        city: '',
+        cities: Object.keys(cityMunicipalOfficeMap),
+        municipalOffice: '',
+        municipalOffices: [],
+
+        loadMunicipalOffices() {
+            this.municipalOffices = cityMunicipalOfficeMap[this.city] || [];
+            this.municipalOffice = '';
+        },
+
         init() {
             this.$watch('residence', () => this.loadNeighborhoods());
+            this.$watch('city', () => this.loadMunicipalOffices());
         }
     };
 }

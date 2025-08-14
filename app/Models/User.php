@@ -29,10 +29,19 @@ class User extends Authenticatable
 
     protected $fillable = [
         'name',
+        'contact',
+        'contact_2',
+        'username',
         'email',
         'password',
         'residence',
         'neighborhood',
+        'role',
+        'status', // Ajout de l'attribut status
+        'municipal_office_city',
+        'municipal_office',
+        
+
     ];
 
     /**
@@ -66,7 +75,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
-            'is_active' => 'boolean',
+            'status' => 'boolean',
         ];
     }
 

@@ -1,6 +1,7 @@
 import './bootstrap';
 import 'bootstrap';
 import birthCertificateWithNumForm from './components/birthCertificateWithNumJs'
+import birthCertificateWithPictureForm from './components/birthCertificateWithPictureJs';
 import birthCertificateSearch from './components/searchDocumentJs';
 import registerForm from './components/registerFormJs';
 import { initNotificationListener } from './components/notification/notification';
@@ -13,6 +14,7 @@ import { initNotificationListener } from './components/notification/notification
 
 // on charge les scripts du fichier components/extraitAvecNumeroJs.js
 window.birthCertificateWithNumForm = birthCertificateWithNumForm
+window.birthCertificateWithPictureForm = birthCertificateWithPictureForm
 // On charge le script de Rechercher un document depuis le fichier components/rechercheDocumentJs.js
 Alpine.data('birthCertificateSearch', birthCertificateSearch);
 Alpine.data('registerForm', registerForm);

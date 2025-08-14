@@ -23,7 +23,7 @@
     </thead>
     <tbody class="divide-y divide-gray-100">
       @foreach ($users as $user)
-      <tr class="border-t divide-y divide-x divide-gray-600 {{ !$user->is_active ? 'bg-red-100' : '' }}">
+      <tr class="divide-y divide-x divide-gray-200">
       <td class="px-2 py-1 text-sm text-gray-600">{{ $loop->iteration }}</td>
       <td class="px-2 py-1 text-sm text-gray-600">{{ $user->name }}</td>
       <td class="px-2 py-1 text-sm text-gray-600">{{ $user->email }}</td>
@@ -49,24 +49,9 @@
       <!-- Fin Action -->
 
       <!-- Status -->
-     <td class="px-4 py-2 text-xs text-gray-700">
-          <div class="flex items-center justify-between">
-              <span class="px-2 py-0.5 rounded-full font-medium
-                  {{ $user->is_active ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' }}">
-                  {{ $user->is_active ? 'Actif' : 'Inactif' }}
-              </span>
-
-              <form method="POST" action="{{ route('users.status-toggle', $user->id) }}">
-                  @csrf
-                  @method('PATCH')
-                  <button type="submit"
-                      class="inline-flex items-center px-2 py-1 text-xs font-semibold rounded-md transition duration-200
-                      {{ $user->is_active ? 'bg-red-600 hover:bg-red-700 text-white' : 'bg-green-600 hover:bg-green-700 text-white' }}">
-                      {{ $user->is_active ? 'Désactiver' : 'Activer' }}
-                  </button>
-              </form>
-          </div>
-      </td>
+      <td>
+            <livewire:user-status :user="$user" />
+        </td>
 
     <!-- Fin status -->
 

@@ -12,9 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-        $table->enum('role', ['admin', 'super_admin'])->default('admin');
-    });
-
+             $table->string('municipal_office')->nullable()->change();
+        });
     }
 
     /**
@@ -22,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        // Schema::table('users', function (Blueprint $table) {
-        //     //
-        // });
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
 };

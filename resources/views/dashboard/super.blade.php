@@ -3,7 +3,6 @@
 @section('content')
 
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-  @livewire('test-livewire')
       <!-- Utilisateurs -->
         <div class="bg-white dark:bg-gray-800 p-4 rounded shadow text-center">
           <a href="{{ route('users.index') }}" class="text-sm">👥Utilisateurs</a>

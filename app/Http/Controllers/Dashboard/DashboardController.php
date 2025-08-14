@@ -28,7 +28,7 @@ class DashboardController extends Controller
         } else if (auth()->user()->isAdmin()) {
             // on retourne les extrait si la localité de l'admin est celle de la demande
             $birthCertificates = BirthCertificate::where('city', $user->residence)->get();
-            $countBirthCertificate = BirthCertificate::count();
+            $countBirthCertificate = count($birthCertificates);
             return view(
                 'dashboard.admin',
                 compact(

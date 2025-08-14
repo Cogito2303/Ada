@@ -5,7 +5,7 @@
        <!-- Demande -->
        <div class="bg-white dark:bg-gray-800 p-4 rounded shadow text-center">
         <a href="{{ route('birth-certificate.index') }}" class="text-sm">🧾Demandes</a>
-        <p class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">{{ $countBirthCertificate }}</p>
+        <p class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">{{ $countBirthCertificate}}</p>
       </div>
 
       @foreach([

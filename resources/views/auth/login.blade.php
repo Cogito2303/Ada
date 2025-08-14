@@ -4,54 +4,62 @@
             <x-authentication-card-logo />
         </x-slot>
         
+ <div class="bg-white p-8 rounded shadow-md w-full max-w-md">
+        <h1 class="text-2xl font-bold mb-6 text-center">Se connecter</h1>
          <!-- ✅ Message personnalisé pour les comptes inactifs -->
         @if (session('inactive_error'))
-            <div class="text-red-600 mb-4 font-semibold">
+            <div class="px-4 py-2 mb-4 font-semibold bg-yellow-500 rounded p-4">
                 {{ session('inactive_error') }}
             </div>
         @endif
 
-
-        <x-validation-errors class="mb-4" />
-
-        @session('status')
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ $value }}
+        <!-- @if ($errors->any())
+            <div class="mb-4 text-red-600 font-semibold">
+                {{ implode(', ', $errors->all()) }}
             </div>
-        @endsession
-        
+        @endif -->
+
+        <!-- @if (session('status'))
+            <div class="mb-4 text-green-600 font-medium">
+                {{ session('status') }}
+            </div>
+        @endif -->
 
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
-            <div>
-                <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+            <div class="mb-4">
+                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                <input type="email" name="email" id="email" required autofocus
+                       value="{{ old('email') }}"
+                       class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
             </div>
 
-            <div class="mt-4">
-                <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
+            <div class="mb-6">
+                <label for="password" class="block text-sm font-medium text-gray-700">Mot de passe</label>
+                <input type="password" name="password" id="password" required
+                       class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
             </div>
 
-            <div class="block mt-4">
-                <label for="remember_me" class="flex items-center">
-                    <x-checkbox id="remember_me" name="remember" />
-                    <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+            <div class="flex items-center justify-between mb-6">
+                <label class="flex items-center">
+                    <input type="checkbox" name="remember" class="h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                    <span class="ml-2 text-sm text-gray-600">Se souvenir de moi</span>
                 </label>
-            </div>
 
-            <div class="flex items-center justify-end mt-4">
                 @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
+                    <a href="{{ route('password.request') }}" class="text-sm text-indigo-600 hover:underline">
+                        Mot de passe oublié ?
                     </a>
                 @endif
-
-                <x-button class="ms-4">
-                    {{ __('Log in') }}
-                </x-button>
             </div>
+
+            <button type="submit"
+                    class="w-full py-2 px-4 bg-indigo-600 text-white font-semibold rounded hover:bg-indigo-700 transition">
+                Connexion
+            </button>
         </form>
+    </div>
+
     </x-authentication-card>
 </x-guest-layout>

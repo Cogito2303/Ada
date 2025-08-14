@@ -5,9 +5,15 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Laravel\Jetstream\Jetstream;
+use App\Actions\Fortify\PasswordValidationRules;
+use Illuminate\Support\Facades\Hash;
+
 
 class UserController extends Controller
 {
+    use PasswordValidationRules;
+
     public function index()
     {
         abort_unless(auth()->user()->isSuperAdmin(), 403);
@@ -24,29 +30,41 @@ class UserController extends Controller
         return view('users.create');
     }
 
-     public function store(Request $request)
-    {
-         $request->validate([
-        'name' => 'required|string',
-        'email' => 'required|email|unique:users',
-        'residence' => 'required|string',
-        'neighborhood' => 'required|string',
-        'password' => 'required|string|confirmed|min:8',
+public function store(Request $request)
+{
+    $request->validate([
+        'name' => ['required', 'string', 'max:255'],
+        'contact' => ['required', 'string', 'max:255'],
+        'contact_2' => ['nullable', 'string', 'max:255'],
+        'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        'password' => $this->passwordRules(),
+        'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : [],
+        'residence' => ['required', 'string', 'max:255'],
+        'neighborhood' => ['required', 'string', 'max:255'],
+        'municipal_office_city' => ['required', 'string', 'max:255'],
+        'municipal_office' => ['required', 'string', 'max:255'],
     ]);
+
+    // Utilisation directe de $request->validated() pour plus de clarté
+    $input = $request->all();
 
     User::create([
-        'name' => $request->name,
-        'email' => $request->email,
-        'residence' => $request->residence,
-        'neighborhood' => $request->neighborhood,
-        'password' => bcrypt($request->password),
-        'role' => 'admin'
+        'name' => $input['name'],
+        'contact' => $input['contact'],
+        'contact_2' => $input['contact_2'] ?? null,
+        'username' => $input['username'] ?? null,
+        'email' => $input['email'],
+        'password' => Hash::make($input['password']),
+        'role' => 'admin',
+        'residence' => $input['residence'] ?? 'Bouake',
+        'neighborhood' => $input['neighborhood'] ?? 'Dar-es-Salam',
+        'municipal_office_city' => $input['municipal_office_city'] ?? 'Bouake',
+        'municipal_office' => $input['municipal_office'] ?? 'Bouake',
+        'status' => true,
     ]);
-    
 
     return redirect()->route('login')->with('success', 'Utilisateur créé avec succès.');
-
-    }
+}
 
     // Editer un user
     public function edit($id)

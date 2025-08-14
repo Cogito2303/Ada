@@ -51,19 +51,22 @@ class FortifyServiceProvider extends ServiceProvider
 
         Fortify::authenticateUsing(function ($request) {
         $user = User::where('email', $request->email)->first();
-
-        if (! $user ||
-            ! Hash::check($request->password, $user->password)) {
+        // On verifie si l'utilisateur existe et si son compte est actif et son mdp est corrrect
+          if ($user && Hash::check($request->password, $user->password)) {
+            // On verifier si le compte de l'utilisateur est actif
+                if (!$user->status === true) {
+                    session()->flash('inactive_error', "Votre compte est suspendu. Veuillez contacter l'administrateur pour une réactivation.");
+                    info("🚫 Compte inactif pour {$user->email}");
+                    return null;
+                }
+                // Connecter l'utilisateur
+                    return $user;
+            }
+            // Identifiants invalides
+            session()->flash('inactive_error', "Echec connexion identfiants incorrects");
             return null;
-        }
 
-        // 🔒 Vérifie que le compte est actif
-        if (! $user->is_active) {
-            // Optionnel : tu peux aussi logguer l'événement ici
-           return null;
-        }
 
-        return $user;
     });
 
     }
